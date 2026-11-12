@@ -1,0 +1,11 @@
+{
+  "handle": "@yapayzeka.egitim",
+  "scenes": [
+    {"type": "hook", "duration": 3.5, "line1": "Kurumun yapay zekâ kullanıyor.", "line2": "Peki bir hata olursa kim sorumlu?"},
+    {"type": "statement", "duration": 4.5, "label": "Yapay zekâ yönetişimi", "text": "Kuralları, rolleri ve denetimi sorun çıkmadan önce belirlemek."},
+    {"type": "list", "duration": 5.5, "title": "3 temel soru", "items": ["Hangi yapay zekâ sistemlerini kullanıyoruz?", "Bu sistemler kimi, nasıl etkileyebilir?", "Bir şey ters giderse kim hesap verir?"]},
+    {"type": "levels", "duration": 6.0, "title": "AB Yapay Zekâ Yasası riske göre ayırır:", "levels": [["Kabul edilemez", "Yasak — ör. sosyal puanlama"], ["Yüksek risk", "Sıkı yükümlülükler — ör. işe alım"], ["Sınırlı risk", "Şeffaflık — ör. sohbet botları"], ["Minimal risk", "Serbest — ör. spam filtreleri"]]},
+    {"type": "statement", "duration": 3.5, "text": "Yönetişim inovasyonu yavaşlatmaz. Güveni hızlandırır."},
+    {"type": "cta", "duration": 4.0, "text": "Yapay zekâ eğitim programımızda bunu adım adım uyguluyoruz.", "button": "Takip et →"}
+  ]
+}
