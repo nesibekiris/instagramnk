@@ -2,351 +2,316 @@
 <html lang="tr">
 <head>
 <meta charset="utf-8">
-<title>Stratri Reels — Gizli Sekme</title>
+<title>Stratri Reels v2 — Kim Onayladı?</title>
 <link rel="stylesheet" href="assets/fonts.css">
 <style>
 /* ================================================================
-   STRATRI · "GİZLİ SEKME" · 1080x1920 · 30 sn
-   Düzenleme: metinler aşağıdaki TEXT nesnesinde, zamanlamalar T
-   nesnesinde. Her şey seek(t) ile saniyeye göre çizilir.
+   STRATRI · v2 "KİM ONAYLADI?" · 1080x1920 · 27 sn · 120 BPM
+   Sert kesmeler, ritme oturan kinetik tipografi, kamera hareketi.
+   Metinler: TEXT · Çekim zamanları: SHOTS · Ses: make_audio.py
    ================================================================ */
-:root{
-  --navy:#162C5E; --navy2:#1E3870; --off:#FBF9F5; --lav:#CCC9DC;
-  --sage:#C9D2C4; --petrol:#254958; --ice:#A4B6C6; --signal:#E9A23B;
-  --ink:#162C5E; --muted:#6B7591;
-}
+:root{--navy:#162C5E;--deep:#0E1D42;--off:#FBF9F5;--lav:#CCC9DC;--sage:#C9D2C4;--petrol:#254958;--ice:#A4B6C6;--sig:#E9A23B}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{background:#0c1530}
-body{font-family:'DM Sans',sans-serif;color:var(--off);display:flex;flex-direction:column;align-items:center;gap:16px;padding:16px}
+html,body{background:#0a1228}
+body{font-family:'DM Sans',sans-serif;color:var(--off);display:flex;flex-direction:column;align-items:center;gap:14px;padding:14px}
 #stage{width:1080px;height:1920px;position:relative;overflow:hidden;background:var(--navy);transform-origin:top left}
 .wrap{position:relative}
-.scene{position:absolute;inset:0;opacity:0}
-.mono{font-family:'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase}
+.shot{position:absolute;inset:0;display:none;overflow:hidden}
+.cam{position:absolute;inset:0;transform-origin:50% 45%}
 .serif{font-family:'Crimson Pro',serif}
+.mono{font-family:'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase}
 .abs{position:absolute}
-.src{position:absolute;left:80px;right:80px;font-family:'IBM Plex Mono',monospace;font-size:21px;line-height:1.5;letter-spacing:.02em}
-.word{display:inline-block;will-change:transform,opacity}
-/* ---------- S1 ---------- */
-#s1 .label{left:80px;top:300px;font-size:26px;color:var(--lav)}
-#s1 .big{left:66px;top:330px;letter-spacing:-.02em;font-size:400px;font-weight:700;line-height:1;color:var(--off);font-variant-numeric:tabular-nums}
-#s1 .big .pct{font-size:220px;margin-left:-10px;color:var(--lav);font-style:italic;font-weight:600}
-#s1 .cap{left:80px;top:770px;width:900px;font-size:58px;line-height:1.2;font-weight:500}
-#s1 .grid{left:80px;top:1010px;display:grid;grid-template-columns:repeat(20,1fr);gap:12px;width:920px}
-#s1 .dot{width:34px;height:34px;border-radius:50%;background:rgba(204,201,220,.13)}
-#s1 .punch{left:80px;top:1270px;width:920px;font-size:64px;line-height:1.12;font-weight:600}
-#s1 .src{top:1470px;color:var(--ice)}
-/* ---------- S2 ---------- */
-#s2{background:var(--navy)}
-#s2 .kicker{left:80px;top:270px;font-size:26px;color:var(--lav)}
-#s2 .win{left:60px;top:360px;width:960px;height:700px;background:var(--off);border-radius:28px;box-shadow:0 40px 120px rgba(0,0,0,.45);overflow:hidden;color:var(--ink)}
-.bar{height:72px;background:#ECE9E2;display:flex;align-items:center;gap:12px;padding:0 28px}
-.bar i{width:18px;height:18px;border-radius:50%;background:#D5D1C8;display:block}
-.bar .ttl{margin-left:20px;font-size:24px;color:#5b6278}
-.bar .acct{margin-left:auto;font-family:'IBM Plex Mono';font-size:19px;padding:6px 14px;border-radius:20px;background:#F6E3C3;color:#7A4B07}
-.chat{padding:40px 44px}
-.bubble{background:#ECEEF5;border-radius:22px;padding:24px 28px;font-size:30px;line-height:1.35;width:720px}
-.drop{margin-top:34px;height:230px;border:3px dashed #B9BFD3;border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:28px;color:#8A91A8}
-.file{position:absolute;left:84px;top:1170px;width:520px;height:120px;background:#fff;border-radius:20px;display:flex;align-items:center;gap:22px;padding:0 26px;color:var(--ink);box-shadow:0 18px 50px rgba(0,0,0,.35)}
-.xls{width:62px;height:76px;border-radius:10px;background:#2F7A4D;color:#fff;font-weight:700;font-size:22px;display:flex;align-items:center;justify-content:center}
-.fname{font-size:29px;font-weight:700}
-.fmeta{font-family:'IBM Plex Mono';font-size:19px;color:#7d849b;margin-top:4px}
-.upl{margin-top:34px;display:none}
-.upl .row{display:flex;justify-content:space-between;font-family:'IBM Plex Mono';font-size:24px;color:#5b6278}
-.upl .track{margin-top:16px;height:22px;border-radius:11px;background:#E3E1DA;overflow:hidden}
-.upl .fill{height:100%;width:0;background:var(--navy);border-radius:11px}
-.sheet{margin-top:34px;border-radius:16px;overflow:hidden;border:2px solid #E3E1DA;font-family:'IBM Plex Mono';font-size:20px}
-.sheet div{display:grid;grid-template-columns:1.3fr 1.2fr 1.3fr 1fr;padding:12px 18px;border-top:1px solid #ECE9E2}
-.sheet div:first-child{background:#F1EFE9;font-weight:600;border-top:0}
-.cursor{position:absolute;width:56px;height:70px;left:0;top:0}
-#s2 .freeze{position:absolute;inset:0;background:rgba(22,44,94,.0)}
-#s2 .tag{left:80px;top:1190px;font-size:26px;color:var(--signal);opacity:0}
-#s2 .q{left:80px;top:1240px;width:920px;font-size:96px;line-height:1.02;font-style:italic;font-weight:600;color:var(--off)}
-/* ---------- S3 ---------- */
-#s3{background:var(--off);color:var(--ink)}
-#s3 .label{left:80px;top:400px;font-size:26px;color:var(--muted)}
-#s3 .big{left:72px;top:450px;font-size:250px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
-#s3 .big small{font-size:130px;font-style:italic;font-weight:600;color:var(--petrol)}
-#s3 .cap{left:80px;top:760px;width:920px;font-size:50px;line-height:1.22;font-weight:500}
-#s3 .def{left:80px;top:1130px;width:920px;padding:28px 32px;border-left:6px solid var(--navy);background:#F0EEE8;font-size:32px;line-height:1.35}
-#s3 .def b{font-family:'IBM Plex Mono';font-size:22px;letter-spacing:.12em;display:block;margin-bottom:8px;color:var(--muted)}
-#s3 .src{top:1360px;color:var(--muted)}
-/* ---------- S4 ---------- */
-#s4{background:var(--petrol)}
-#s4 .label{left:80px;top:270px;font-size:26px;color:var(--sage)}
-#s4 .head{left:80px;top:310px;width:920px;font-size:82px;line-height:1.02;font-weight:600}
-#s4 .flow{left:80px;top:540px;width:920px}
-.step{position:relative;display:flex;align-items:center;gap:28px;height:150px;opacity:0}
-.node{width:76px;height:76px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono';font-weight:600;font-size:26px;background:rgba(204,201,220,.18);color:var(--lav);border:3px solid var(--lav)}
-.step.done .node{background:var(--sage);border-color:var(--sage);color:var(--petrol)}
-.step .t1{font-size:38px;font-weight:700}
-.step .t2{font-family:'IBM Plex Mono';font-size:21px;color:var(--ice);margin-top:6px;letter-spacing:.02em}
-.step .st{margin-left:auto;font-family:'IBM Plex Mono';font-size:20px;letter-spacing:.12em;color:var(--lav)}
-.step.done .st{color:var(--sage)}
-.line{position:absolute;left:117px;top:578px;width:4px;background:rgba(201,210,196,.25)}
-.line i{display:block;width:100%;background:var(--sage)}
-.gate{margin-top:10px;border:3px solid var(--signal);border-radius:26px;padding:26px 28px;background:rgba(233,162,59,.08);opacity:0}
-.gate .gt{font-family:'IBM Plex Mono';font-size:22px;letter-spacing:.14em;color:var(--signal)}
-.gate .gb{font-size:34px;font-weight:700;margin-top:10px}
-.gate .btns{display:flex;gap:18px;margin-top:20px}
-.gate .btns span{padding:14px 30px;border-radius:40px;font-size:28px;font-weight:700}
-.gate .ok{background:var(--off);color:var(--petrol)}
-.gate .no{border:2px solid var(--off)}
-#s4 .q{left:80px;top:1420px;width:920px;font-size:84px;line-height:1.02;font-style:italic;font-weight:600}
-/* ---------- S5 ---------- */
-#s5{background:var(--navy)}
-#s5 .q{left:80px;top:300px;width:920px;font-size:96px;line-height:1.0;font-weight:700}
-#s5 .q em{color:var(--lav);font-weight:600}
-#s5 .roles{left:80px;top:620px;width:920px}
-.role{display:grid;grid-template-columns:330px 1fr;align-items:center;padding:24px 0;border-top:1px solid rgba(204,201,220,.25);opacity:0}
-.role .r{font-family:'IBM Plex Mono';font-size:21px;letter-spacing:.1em;color:var(--lav);text-transform:uppercase}
-.role .p{font-family:'Crimson Pro';font-size:46px;font-weight:600}
-.role .p i{color:var(--lav)}
-#s5 .card{left:80px;top:1130px;width:920px;height:300px;background:var(--off);border-radius:32px;color:var(--ink);display:flex;align-items:center;gap:36px;padding:0 36px;opacity:0}
-#s5 .ph{width:200px;height:236px;border-radius:100px 100px 22px 22px;overflow:hidden;flex:none;background:#4A6180}
-#s5 .ph img{width:100%;height:100%;object-fit:cover;transform:scale(1.04)}
-#s5 .cta{font-family:'Crimson Pro';font-size:52px;font-weight:700;line-height:1.02}
-#s5 .sub{font-size:25px;margin-top:14px;color:#3d4a70;line-height:1.35}
-#s5 .logo{left:80px;top:1480px;width:330px;opacity:0}
-#s5 .url{right:80px;top:1500px;font-size:22px;text-transform:none;letter-spacing:.06em;color:var(--lav);text-align:right;opacity:0}
-/* global */
-#prog{position:absolute;left:0;top:0;height:8px;background:var(--lav);width:0;z-index:9}
-#safe{position:absolute;inset:0;pointer-events:none;display:none;z-index:10}
-#safe div{position:absolute;left:0;right:0;background:rgba(255,0,80,.18)}
+.src{position:absolute;left:80px;right:80px;font-family:'IBM Plex Mono',monospace;font-size:22px;line-height:1.45}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:20}
+#grain{position:absolute;inset:-50%;opacity:.05;pointer-events:none;z-index:19;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:5px 5px}
+
+/* SHOT 1 · POV ekran */
+#sh1{background:#E9E6DF}
+#sh1 .ui{position:absolute;left:-40px;top:300px;width:1160px;background:var(--off);border-radius:36px;color:var(--navy);padding:60px 90px;box-shadow:0 50px 140px rgba(0,0,0,.35)}
+#sh1 .who{font-family:'IBM Plex Mono';font-size:26px;color:#8A6012;background:#F6E3C3;display:inline-block;padding:8px 18px;border-radius:30px}
+#sh1 .prompt{font-size:80px;font-weight:700;line-height:1.08;margin-top:34px;min-height:150px}
+#sh1 .caret{display:inline-block;width:6px;height:62px;background:var(--navy);vertical-align:-8px;margin-left:4px}
+#sh1 .chip{margin-top:40px;display:flex;align-items:center;gap:26px;background:#fff;border-radius:24px;padding:26px 30px;box-shadow:0 14px 40px rgba(22,44,94,.15)}
+#sh1 .xls{width:78px;height:96px;border-radius:12px;background:#2F7A4D;color:#fff;font-weight:700;font-size:26px;display:flex;align-items:center;justify-content:center}
+#sh1 .fn{font-size:46px;font-weight:700}
+#sh1 .fm{font-family:'IBM Plex Mono';font-size:24px;color:#7d849b;margin-top:6px}
+#sh1 .track{margin-top:40px;height:34px;border-radius:17px;background:#E3E1DA;overflow:hidden}
+#sh1 .fill{height:100%;width:0;background:var(--navy)}
+#sh1 .pct{font-family:'IBM Plex Mono';font-size:44px;font-weight:600;margin-top:18px;text-align:right}
+#sh1 .dur{position:absolute;left:0;right:0;top:1180px;text-align:center;font-family:'Crimson Pro';font-weight:700;font-size:430px;line-height:1;color:var(--sig);letter-spacing:-.02em;text-shadow:0 20px 80px rgba(0,0,0,.35)}
+
+/* SHOT 2 · kim onayladı */
+#sh2{background:var(--lav);color:var(--navy)}
+#sh2 .l{position:absolute;left:70px;font-family:'Crimson Pro';font-weight:700;line-height:.9}
+
+/* SHOT 3 · kimse bilmiyor */
+#sh3{background:var(--deep)}
+#sh3 .t{position:absolute;left:80px;top:700px;width:940px;font-family:'Crimson Pro';font-size:150px;line-height:.95;font-weight:600;font-style:italic}
+
+/* SHOT 4 · %57 redaksiyon */
+#sh4{background:var(--navy)}
+#sh4 .k{left:80px;top:330px;font-size:30px;color:var(--lav)}
+#sh4 .num{position:absolute;left:40px;top:360px;font-family:'Crimson Pro';font-weight:700;font-size:640px;line-height:1;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+#sh4 .num small{font-size:300px;font-style:italic;color:var(--lav);font-weight:600}
+#sh4 .red{position:absolute;left:80px;top:1060px;font-size:96px;font-weight:700;line-height:1.05}
+#sh4 .bar{position:absolute;left:70px;top:1062px;height:112px;background:rgba(5,11,29,.72);width:0}
+#sh4 .stamp{position:absolute;left:80px;top:1220px;font-family:'IBM Plex Mono';font-weight:600;font-size:78px;letter-spacing:.12em;color:var(--sig);border:6px solid var(--sig);padding:8px 26px;transform-origin:left center}
+#sh4 .src{top:1420px;color:var(--ice)}
+
+/* SHOT 5 · %47 */
+#sh5{background:var(--sage);color:var(--navy)}
+#sh5 .k{left:80px;top:330px;font-size:30px;color:var(--petrol)}
+#sh5 .num{position:absolute;left:40px;top:370px;font-family:'Crimson Pro';font-weight:700;font-size:520px;line-height:1;letter-spacing:-.04em}
+#sh5 .num small{font-size:250px;font-style:italic;color:var(--petrol)}
+#sh5 .cap{left:80px;top:900px;font-size:64px;font-weight:700;width:920px;line-height:1.1}
+#sh5 .grid{left:80px;top:1100px;width:920px;display:grid;grid-template-columns:repeat(20,1fr);gap:10px}
+#sh5 .d{width:36px;height:36px;border-radius:50%;background:rgba(22,44,94,.15)}
+#sh5 .src{top:1400px;color:var(--petrol)}
+
+/* SHOT 6 · 670 bin $ */
+#sh6{background:var(--off);color:var(--navy)}
+#sh6 .k{left:80px;top:360px;font-size:30px;color:#6B7591}
+#sh6 .num{position:absolute;left:60px;top:450px;font-family:'Crimson Pro';font-weight:700;font-size:250px;line-height:1;letter-spacing:-.03em}
+#sh6 .unit{position:absolute;left:80px;top:770px;font-family:'Crimson Pro';font-style:italic;font-weight:600;font-size:120px;color:var(--petrol)}
+#sh6 .cap{left:80px;top:950px;width:920px;font-size:52px;line-height:1.18;font-weight:500}
+#sh6 .src{top:1300px;color:#6B7591}
+
+/* SHOT 7 · ajan */
+#sh7{background:var(--petrol)}
+#sh7 .head{left:80px;top:290px;width:920px;font-family:'Crimson Pro';font-size:112px;line-height:.95;font-weight:700}
+#sh7 .flow{left:80px;top:640px;width:920px}
+.st{display:flex;align-items:center;gap:30px;height:128px;opacity:0}
+.nd{width:84px;height:84px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono';font-weight:600;font-size:34px;border:4px solid var(--lav);color:var(--lav)}
+.st.ok .nd{background:var(--sage);border-color:var(--sage);color:var(--petrol)}
+.st .tx{font-size:46px;font-weight:700}
+.gate{margin-top:24px;border:5px solid var(--sig);border-radius:34px;padding:34px;background:rgba(233,162,59,.1);opacity:0}
+.gate .g1{font-family:'IBM Plex Mono';font-size:28px;letter-spacing:.14em;color:var(--sig)}
+.gate .g2{font-size:50px;font-weight:700;margin-top:12px;line-height:1.1}
+.gate .bt{display:flex;gap:22px;margin-top:30px}
+.gate .bt span{flex:1;text-align:center;padding:26px 0;border-radius:60px;font-size:44px;font-weight:700}
+.gate .y{background:var(--off);color:var(--petrol)}
+.gate .n{border:4px solid var(--off)}
+#sh7 .ask{left:80px;top:1440px;width:920px;font-family:'Crimson Pro';font-style:italic;font-size:82px;font-weight:600;line-height:1}
+
+/* SHOT 8 · cevap */
+#sh8{background:var(--navy)}
+#sh8 .a1{left:80px;top:430px;font-size:34px;color:var(--lav)}
+#sh8 .a2{left:80px;top:500px;width:940px;font-family:'Crimson Pro';font-size:132px;font-weight:700;line-height:.95}
+#sh8 .a2 em{color:var(--lav);font-weight:600}
+#sh8 .w{position:absolute;left:80px;font-family:'Crimson Pro';font-size:120px;font-weight:700;line-height:1}
+
+/* SHOT 9 · kapanış */
+#sh9{background:var(--navy)}
+#sh9 .card{left:60px;top:330px;width:960px;background:var(--off);border-radius:40px;color:var(--navy);padding:50px}
+#sh9 .ph{width:250px;height:300px;border-radius:125px 125px 26px 26px;overflow:hidden;background:#4A6180;float:left;margin-right:40px}
+#sh9 .ph img{width:100%;height:100%;object-fit:cover;transform:scale(1.04)}
+#sh9 .cta{font-family:'Crimson Pro';font-size:74px;font-weight:700;line-height:.98}
+#sh9 .who{clear:both;padding-top:30px;font-size:30px;color:#3d4a70;line-height:1.4}
+#sh9 .progs{left:60px;top:1010px;width:960px}
+#sh9 .pg{display:flex;justify-content:space-between;align-items:baseline;padding:20px 6px;border-top:1px solid rgba(204,201,220,.3);opacity:0}
+#sh9 .pg b{font-family:'Crimson Pro';font-size:50px;font-weight:600}
+#sh9 .pg b i{color:var(--lav)}
+#sh9 .pg span{font-family:'IBM Plex Mono';font-size:22px;color:var(--lav);letter-spacing:.08em}
+#sh9 .btn{left:60px;top:1470px;width:960px;height:120px;border-radius:60px;background:var(--lav);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:46px;font-weight:700}
+#sh9 .logo{left:60px;top:1630px;width:300px}
+
+#prog{position:absolute;left:0;top:0;height:8px;background:var(--sig);width:0;z-index:21}
+#safe{position:absolute;inset:0;pointer-events:none;display:none;z-index:30}
+#safe div{position:absolute;left:0;right:0;background:rgba(255,0,80,.2)}
 #ui{width:540px;display:flex;gap:10px;align-items:center;color:#cfd6ea;font:14px 'IBM Plex Mono'}
-#ui input[type=range]{flex:1}
+#ui input{flex:1}
 #ui button{background:#CCC9DC;border:0;border-radius:6px;padding:6px 12px;font:600 14px 'DM Sans';color:#162C5E;cursor:pointer}
 </style>
 </head>
 <body>
 <div class="wrap" id="wrap"><div id="stage">
-  <div id="prog"></div>
 
-  <!-- S1 · KİNETİK VERİ -->
-  <section class="scene" id="s1">
-    <div class="abs mono label" id="s1label">Küresel araştırma · 2025</div>
-    <div class="abs serif big"><span id="s1num">0</span><span class="pct">%</span></div>
-    <div class="abs cap" id="s1cap"></div>
-    <div class="abs grid" id="s1grid"></div>
-    <div class="abs punch" id="s1punch"></div>
-    <div class="src" id="s1src">Kaynak: University of Melbourne & KPMG, <i>Trust, attitudes and use of AI: A global study 2025</i> · 47 ülke, 48.000+ katılımcı, Kas. 2024–Oca. 2025</div>
-  </section>
+<section class="shot" id="sh1"><div class="cam">
+  <div class="ui" id="ui1">
+    <span class="who">AI Asistan · kişisel hesap</span>
+    <div class="prompt"><span id="typed"></span><span class="caret" id="caret"></span></div>
+    <div class="chip" id="chip"><div class="xls">XLS</div><div><div class="fn">Musteri_Listesi_Q3.xlsx</div><div class="fm">1.240 kişi · telefon · e-posta</div></div></div>
+    <div class="track"><div class="fill" id="fill1"></div></div>
+    <div class="pct" id="pct1">0%</div>
+  </div>
+  <div class="dur" id="dur">DUR.</div>
+</div></section>
 
-  <!-- S2 · EKRAN HİKÂYESİ -->
-  <section class="scene" id="s2">
-    <div class="abs mono kicker">Salı · 16:42 · Pazarlama</div>
-    <div class="abs win" id="win">
-      <div class="bar"><i></i><i></i><i></i><span class="ttl">Yeni sohbet — AI Asistan</span><span class="acct">kişisel hesap</span></div>
-      <div class="chat">
-        <div class="bubble">Bu listedeki müşterileri segmentlere ayır ve her biri için kampanya mesajı yaz.</div>
-        <div class="drop" id="drop">Dosyayı buraya bırakın</div>
-        <div class="upl" id="upl">
-          <div class="row"><span>Musteri_Listesi_Q3.xlsx</span><span id="uplpct">0%</span></div>
-          <div class="track"><div class="fill" id="uplfill"></div></div>
-        </div>
-        <div class="sheet" id="sheet">
-          <div><span>AD SOYAD</span><span>TELEFON</span><span>E-POSTA</span><span>SÖZLEŞME</span></div>
-          <div><span>A*** Y***</span><span>+90 5** *** 41</span><span>a***@****.com</span><span>Kurumsal</span></div>
-          <div><span>M*** K***</span><span>+90 5** *** 07</span><span>m***@****.com</span><span>Bireysel</span></div>
-          <div><span>S*** D***</span><span>+90 5** *** 93</span><span>s***@****.com</span><span>Kurumsal</span></div>
-          <div><span>… 1.240 kayıt</span><span></span><span></span><span></span></div>
-        </div>
-      </div>
-    </div>
-    <div class="file" id="file"><div class="xls">XLS</div><div><div class="fname">Musteri_Listesi_Q3.xlsx</div><div class="fmeta">2,4 MB · 1.240 satır · kişisel veri</div></div></div>
-    <svg class="cursor" id="cursor" viewBox="0 0 28 35"><path d="M2 2 L2 28 L9 21 L14 33 L19 31 L14 19 L24 19 Z" fill="#fff" stroke="#162C5E" stroke-width="2" stroke-linejoin="round"/></svg>
-    <div class="freeze" id="freeze"></div>
-    <div class="abs mono tag" id="s2tag">■ Yükleme %95'te</div>
-    <div class="abs serif q" id="s2q"></div>
-  </section>
+<section class="shot" id="sh2"><div class="cam">
+  <div class="l" id="l1" style="top:420px;font-size:200px">Bu dosyayı</div>
+  <div class="l" id="l2" style="top:640px;font-size:470px;font-style:italic;font-weight:600">kim</div>
+  <div class="l" id="l3" style="top:1090px;font-size:200px">onayladı?</div>
+</div></section>
 
-  <!-- S3 · KİNETİK VERİ 2 -->
-  <section class="scene" id="s3">
-    <div class="abs mono label">IBM · Cost of a Data Breach · 2025</div>
-    <div class="abs serif big">+<span id="s3num">0</span> <small>bin $</small></div>
-    <div class="abs cap" id="s3cap"></div>
-    <div class="abs def" id="s3def"><b>GÖLGE AI (SHADOW AI)</b>Çalışanların kurumun onaylamadığı yapay zekâ araçlarını kullanması.</div>
-    <div class="src" id="s3src">Kaynak: IBM & Ponemon Institute, Cost of a Data Breach Report 2025 · 600 kuruluş, Mart 2024–Şubat 2025 ihlalleri. Bulgu bir ilişkiyi gösterir; tek bir dosyanın maliyetini veya nedenselliği göstermez.</div>
-  </section>
+<section class="shot" id="sh3"><div class="cam"><div class="t" id="t3"></div></div></section>
 
-  <!-- S4 · İŞ AKIŞI SİMÜLASYONU -->
-  <section class="scene" id="s4">
-    <div class="abs mono label">Örnek iş akışı · AI ajanı</div>
-    <div class="abs serif head" id="s4head"></div>
-    <div class="line" id="line"><i id="linefill"></i></div>
-    <div class="abs flow" id="flow">
-      <div class="step"><div class="node">01</div><div><div class="t1">Talebi okudu</div><div class="t2">“Q3 müşteri listesini ajansla paylaş”</div></div><div class="st">BEKLİYOR</div></div>
-      <div class="step"><div class="node">02</div><div><div class="t1">CRM'den kayıtları çekti</div><div class="t2">1.240 kayıt · kişisel veri içeriyor</div></div><div class="st">BEKLİYOR</div></div>
-      <div class="step"><div class="node">03</div><div><div class="t1">Dosyayı hazırladı</div><div class="t2">Musteri_Listesi_Q3.xlsx</div></div><div class="st">BEKLİYOR</div></div>
-      <div class="step"><div class="node">04</div><div><div class="t1">Dış ajansa gönderecek</div><div class="t2">alıcı: kurum dışı alan adı</div></div><div class="st">BEKLİYOR</div></div>
-      <div class="gate" id="gate"><div class="gt">● İNSAN ONAYI GEREKLİ</div><div class="gb">Kişisel veri kurum dışına çıkıyor.</div><div class="btns"><span class="ok">Onayla</span><span class="no">Durdur</span></div></div>
-    </div>
-    <div class="abs serif q" id="s4q"></div>
-  </section>
+<section class="shot" id="sh4"><div class="cam">
+  <div class="abs mono k">Çalışanların</div>
+  <div class="num"><span id="n4">0</span><small>%</small></div>
+  <div class="red" id="red4">AI kullandığını</div>
+  <div class="bar" id="bar4"></div>
+  <div class="stamp" id="stamp4">GİZLİYOR</div>
+  <div class="src" id="src4">University of Melbourne & KPMG · Trust, attitudes and use of AI: A global study 2025 · 47 ülke, 48.000+ kişi</div>
+</div></section>
 
-  <!-- S5 · KAPANIŞ -->
-  <section class="scene" id="s5">
-    <div class="abs serif q" id="s5q"></div>
-    <div class="abs roles" id="roles">
-      <div class="role"><div class="r">Tüm çalışanlar</div><div class="p">RAI for <i>Business Professionals</i></div></div>
-      <div class="role"><div class="r">Risk · uyum · hukuk</div><div class="p">Governance <i>Essentials</i> & <i>Mastery</i></div></div>
-      <div class="role"><div class="r">Teknoloji · güvenlik</div><div class="p">Agentic <i>Oversight</i></div></div>
-      <div class="role"><div class="r">Yönetim kurulu</div><div class="p">C-level RAI <i>Strategy</i></div></div>
-    </div>
-    <div class="abs card" id="card">
-      <div class="ph"><img src="assets/founder.png" alt=""></div>
-      <div><div class="cta">Ekibiniz için doğru eğitimi birlikte belirleyelim.</div>
-      <div class="sub">Nesibe Kırış Can · Kurucu, Stratri<br>Ücretsiz ilk görüşme · kuruma özel programlar</div></div>
-    </div>
-    <img class="abs logo" id="logo" src="assets/logo_on_navy.png" alt="Stratri">
-    <div class="abs mono url" id="url">stratri.com/tr<br>yapay-zeka-egitimleri</div>
-  </section>
+<section class="shot" id="sh5"><div class="cam">
+  <div class="abs mono k">Eğitim aldığını söyleyen</div>
+  <div class="num"><span id="n5">0</span><small>%</small></div>
+  <div class="abs cap" id="cap5">Yarısından azı.</div>
+  <div class="abs grid" id="grid5"></div>
+  <div class="src">Aynı araştırma · University of Melbourne & KPMG, 2025</div>
+</div></section>
 
-  <div id="safe"><div style="top:0;height:220px"></div><div style="bottom:0;height:340px"></div></div>
+<section class="shot" id="sh6"><div class="cam">
+  <div class="abs mono k">Gölge AI'ın bedeli</div>
+  <div class="num" id="n6">+0</div>
+  <div class="unit">dolar fazla</div>
+  <div class="abs cap" id="cap6">Onaysız AI kullanımı yüksek olan kuruluşlarda bir veri ihlalinin ortalama maliyeti, düşük olanlara göre bu kadar daha yüksekti.</div>
+  <div class="src">IBM · Cost of a Data Breach Report 2025 · 600 kuruluş. İlişkiyi gösterir, nedenselliği değil.</div>
+</div></section>
+
+<section class="shot" id="sh7"><div class="cam">
+  <div class="abs head" id="h7">Yarın bu işi bir AI ajanı yapacak.</div>
+  <div class="abs flow">
+    <div class="st"><div class="nd">1</div><div class="tx">Talebi okudu</div></div>
+    <div class="st"><div class="nd">2</div><div class="tx">1.240 kaydı çekti</div></div>
+    <div class="st"><div class="nd">3</div><div class="tx">Dosyayı hazırladı</div></div>
+    <div class="gate" id="gate"><div class="g1">● İnsan onayı bekleniyor</div><div class="g2">Kişisel veri kurum dışına gönderilecek.</div><div class="bt"><span class="y">Onayla</span><span class="n">Durdur</span></div></div>
+  </div>
+  <div class="abs ask" id="ask7">Sen olsan hangisine basardın?</div>
+</div></section>
+
+<section class="shot" id="sh8"><div class="cam">
+  <div class="abs mono a1" id="a1">Doğru cevap</div>
+  <div class="abs a2" id="a2">Bu kararı <em>kimin</em> vereceğini önceden belirlemek.</div>
+  <div class="w" id="w1" style="top:1100px">Yetki.</div>
+  <div class="w" id="w2" style="top:1230px;color:var(--lav);font-style:italic">Sorumluluk.</div>
+  <div class="w" id="w3" style="top:1360px">Denetim.</div>
+</div></section>
+
+<section class="shot" id="sh9"><div class="cam">
+  <div class="abs card" id="card9"><div class="ph"><img src="assets/founder.png" alt=""></div>
+    <div class="cta">Ekibinize bunu birlikte öğretelim.</div>
+    <div class="who">Nesibe Kırış Can · Kurucu, Stratri<br>Kuruma özel yapay zekâ yönetişimi eğitimleri</div></div>
+  <div class="abs progs">
+    <div class="pg"><b>RAI for <i>Business Professionals</i></b><span>TÜM ÇALIŞANLAR</span></div>
+    <div class="pg"><b>Governance <i>Essentials</i></b><span>RİSK · UYUM</span></div>
+    <div class="pg"><b>Agentic <i>Oversight</i></b><span>TEKNOLOJİ</span></div>
+    <div class="pg"><b>C-level RAI <i>Strategy</i></b><span>YÖNETİM</span></div>
+  </div>
+  <div class="abs btn" id="btn9">Ücretsiz ilk görüşme →</div>
+  <img class="abs logo" id="logo9" src="assets/logo_on_navy.png" alt="Stratri">
+</div></section>
+
+<div id="grain"></div><div id="flash"></div><div id="prog"></div>
+<div id="safe"><div style="top:0;height:220px"></div><div style="bottom:0;height:340px"></div></div>
 </div></div>
-<div id="ui"><button id="play">▶︎ Oynat</button><input id="scrub" type="range" min="0" max="30" step="0.01" value="0"><span id="tc">0.00</span><button id="safebtn">Güvenli alan</button></div>
+<div id="ui"><button id="play">▶︎ Oynat</button><input id="scrub" type="range" min="0" max="27" step="0.01" value="0"><span id="tc">0.00</span><button id="safebtn">Güvenli alan</button></div>
 
 <script>
-/* ---------------- METİNLER (buradan düzenleyin) ---------------- */
-const TEXT = {
-  s1capA: "çalışan, işte yapay zekâ kullandığını gizlediğini söylüyor.",
-  s1capB: "çalışan, yapay zekâ eğitimi aldığını söylüyor.",
-  s1punch: "Kullanım görünmüyor. Eğitim yetişmiyor.",
-  s2q: "Bu dosyayı yüklemeye kim izin verdi?",
-  s3cap: "Yüksek düzeyde gölge AI bulunan kuruluşlarda bir veri ihlalinin ortalama maliyeti, düşük düzeyde ya da hiç olmayanlara göre 670 bin $ daha yüksekti.",
-  s4head: "Yarın aynı işi bir AI ajanı yapacak.",
-  s4q: "Ajan çalışıyor. Sınırlarını kim çizdi?",
-  s5q: "Sizin kurumunuzda <em>kim, ne kadar</em> biliyor?",
-};
-/* ---------------- ZAMANLAMA (saniye) ---------------- */
-const T = { s1:[0,5.6], s2:[5.6,12.6], s3:[12.6,16.4], s4:[16.4,23.0], s5:[23.0,30.0], total:30 };
+const TEXT = { prompt:"Bu müşteri listesini analiz et", t3:"Muhtemelen kimse bilmiyor." };
+// Çekimler: [başlangıç, bitiş] saniye. 120 BPM → 1 vuruş = 0.5 sn
+const SHOTS = { sh1:[0,2.75], sh2:[2.75,4.5], sh3:[4.5,6.0], sh4:[6.0,9.0], sh5:[9.0,11.5], sh6:[11.5,14.5], sh7:[14.5,20.5], sh8:[20.5,23.5], sh9:[23.5,27.0] };
+const DURATION = 27;
+window.CUES = []; // ses efektleri için (make_audio.py okur)
 
-/* ---------------- yardımcılar ---------------- */
-const $ = id => document.getElementById(id);
-const clamp = (x,a=0,b=1)=>Math.max(a,Math.min(b,x));
-const r = (t,a,b)=>clamp((t-a)/(b-a));                 // doğrusal 0..1
-const eo = x=>1-Math.pow(1-x,3);                        // ease-out
-const eio = x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;     // ease-in-out
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const r=(t,a,b)=>clamp((t-a)/(b-a));
+const eo=x=>1-Math.pow(1-x,3), eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const back=x=>{const c=1.9;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2);}; // hafif taşma
 const lerp=(a,b,x)=>a+(b-a)*x;
-function words(el, text){ if(el.dataset.t===text) return; el.dataset.t=text;
-  el.innerHTML = text.split(/(\s+|<[^>]+>[^<]*<\/[^>]+>)/).filter(s=>s&&s.trim()).map(w=>`<span class="word">${w}</span>`).join(" "); }
-function reveal(el, t, start, per=0.05, dur=0.45){
-  [...el.children].forEach((w,i)=>{ const p=eo(r(t,start+i*per,start+i*per+dur));
-    w.style.opacity=p; w.style.transform=`translateY(${(1-p)*36}px)`; }); }
-function sceneAlpha(t,[a,b],fin=.3,fout=.3){ return Math.min(r(t,a,a+fin), 1-r(t,b-fout,b)); }
-const fmt = n => n.toLocaleString('tr-TR');
+function pop(el,t,a,dur=.25,from=1.6){const p=r(t,a,a+dur);el.style.opacity=p>0?1:0;el.style.transform=`scale(${lerp(from,1,back(p))})`;}
+function slide(el,t,a,dur=.3,dx=0,dy=80){const p=eo(r(t,a,a+dur));el.style.opacity=p;el.style.transform=`translate(${(1-p)*dx}px,${(1-p)*dy}px)`;}
+function shake(t,a,amp=18,dur=.3){const p=r(t,a,a+dur); if(p<=0||p>=1) return ''; const k=(1-p)*amp; return `translate(${Math.sin(t*90)*k}px,${Math.cos(t*70)*k}px)`;}
+function cam(id,t,[a,b],z0=1.0,z1=1.06,extra=''){const el=document.querySelector('#'+id+' .cam'); el.style.transform=`scale(${lerp(z0,z1,r(t,a,b))}) ${extra}`;}
 
-/* ---------------- kurulum ---------------- */
-const grid=$('s1grid'); for(let i=0;i<100;i++){const d=document.createElement('div');d.className='dot';grid.appendChild(d);}
-const dots=[...grid.children];
-words($('s1punch'),TEXT.s1punch); words($('s2q'),TEXT.s2q); words($('s3cap'),TEXT.s3cap);
-words($('s4head'),TEXT.s4head); words($('s4q'),TEXT.s4q); words($('s5q'),TEXT.s5q);
+// ızgara
+const g5=$('grid5'); for(let i=0;i<100;i++){const d=document.createElement('div');d.className='d';g5.appendChild(d);}
+const dots5=[...g5.children];
 
-/* ---------------- sahneler ---------------- */
-function S1(t){
-  const el=$('s1'); el.style.opacity=sceneAlpha(t,T.s1,.01,.35);
-  $('s1label').style.opacity=r(t,0,.3);
-  // 0 → 57, sonra 57 → 47
-  const up=eo(r(t,.1,1.3)), down=eio(r(t,2.9,3.6));
-  const n = Math.round(lerp(0,57,up) - 10*down); $('s1num').textContent=n;
-  const cap=$('s1cap'); const phaseB = t>=3.25;
-  words(cap, phaseB?TEXT.s1capB:TEXT.s1capA);
-  reveal(cap,t, phaseB?3.3:.5, .04,.4);
-  if(!phaseB) cap.style.opacity=1-r(t,2.85,3.2); else cap.style.opacity=1;
-  // nokta ızgarası
-  const filled = Math.round(lerp(0,57,eo(r(t,.4,1.6))) - 10*down);
-  dots.forEach((d,i)=>{ const appear=eo(r(t,.15+i*.006,.45+i*.006));
-    d.style.transform=`scale(${appear})`;
-    d.style.background = i<filled ? (phaseB?'#C9D2C4':'#CCC9DC') : 'rgba(204,201,220,.13)'; });
-  reveal($('s1punch'),t,4.05,.07,.4);
-  $('s1src').style.opacity=r(t,.6,1.1)*.95;
+function sh1(t){
+  const n=Math.round(eo(r(t,.05,.9))*TEXT.prompt.length); $('typed').textContent=TEXT.prompt.slice(0,n);
+  $('caret').style.opacity = (Math.floor(t*4)%2||t<1)?1:0;
+  slide($('chip'),t,.95,.2,0,60);
+  const up=r(t,1.15,1.95); const v=Math.min(95,Math.floor(eio(up)*95)); $('fill1').style.width=v+'%'; $('pct1').textContent=v+'%';
+  const fz=r(t,2.0,2.1);
+  $('ui1').style.filter=`saturate(${1-fz}) brightness(${1-fz*.45})`;
+  $('fill1').style.background=fz>0?'#E9A23B':'#162C5E';
+  $('sh1').style.background=fz>0?'#1a1a1a':'#E9E6DF';
+  pop($('dur'),t,2.05,.2,2.4);
+  cam('sh1',t,[0,2.0],1.0,1.08, shake(t,2.05,26,.35));
 }
-function cursorPath(t){ // imleç: dosya → bırakma alanı
-  const p=eio(r(t,6.25,7.35));
-  const x=lerp(470,520,p), y=lerp(1240,700,p) - Math.sin(p*Math.PI)*80;
-  return [x,y,p];
+function sh2(t){
+  pop($('l1'),t,2.8,.22,1.4); pop($('l2'),t,3.3,.25,2.2); pop($('l3'),t,3.8,.22,1.4);
+  cam('sh2',t,[2.75,4.5],1.0,1.05, shake(t,3.3,14,.25));
 }
-function S2(t){
-  const el=$('s2'); el.style.opacity=sceneAlpha(t,T.s2,.35,.35);
-  const lt=t-T.s2[0];
-  const win=$('win'); const wi=eo(r(t,5.6,6.2)); win.style.transform=`translateY(${(1-wi)*120}px)`; win.style.opacity=wi;
-  const file=$('file'); const [cx,cy,p]=cursorPath(t);
-  const fi=eo(r(t,5.9,6.25));
-  // dosya imleçle sürüklenir, bırakınca kaybolur
-  const drag = p>0 && t<7.45;
-  file.style.opacity = t<7.45 ? fi : 1-r(t,7.45,7.6);
-  file.style.transform = drag? `translate(${cx-470}px,${cy-1240}px) rotate(${-4*Math.sin(p*Math.PI)}deg) scale(${1-.15*p})` : `translateY(${(1-fi)*40}px)`;
-  const cur=$('cursor'); cur.style.opacity = r(t,6.0,6.2)*(1-r(t,10.3,10.6));
-  const after = t>=7.45; const [ex,ey] = after? [lerp(520,860,eo(r(t,7.6,8.4))), lerp(700,960,eo(r(t,7.6,8.4)))] : [cx,cy];
-  cur.style.transform=`translate(${ex+40}px,${ey+30}px)`;
-  // bırakma alanı vurgusu
-  const drop=$('drop'); drop.style.display = t<7.5?'flex':'none';
-  drop.style.borderColor = p>.7? '#162C5E':'#B9BFD3'; drop.style.background = p>.7? 'rgba(22,44,94,.05)':'transparent';
-  // yükleme çubuğu 0 → 95
-  const upl=$('upl'); upl.style.display = t>=7.5?'block':'none';
-  const up = eio(r(t,7.6,10.3))*95; const pct=Math.floor(up);
-  $('uplfill').style.width=up+'%'; $('uplpct').textContent=pct+'%';
-  $('sheet').style.opacity = r(t,7.7,8.2);
-  // DONMA anı
-  const fz=r(t,10.35,10.75);
-  win.style.filter=`saturate(${1-fz*.8}) brightness(${1-fz*.25})`;
-  $('freeze').style.background=`rgba(22,44,94,${fz*.55})`;
-  $('uplfill').style.background = fz>0? '#E9A23B':'#162C5E';
-  // pencere hafif geri çekilir, soru gelir
-  win.style.transform += ` scale(${1-fz*.05})`;
-  $('s2tag').style.opacity=r(t,10.5,10.8);
-  reveal($('s2q'),t,10.75,.09,.5);
+function sh3(t){
+  const w=TEXT.t3.split(' '); const el=$('t3'); el.innerHTML=w.map((x,i)=>`<span style="display:inline-block;opacity:${r(t,4.6+i*.35,4.75+i*.35)};transform:translateY(${(1-eo(r(t,4.6+i*.35,4.85+i*.35)))*60}px)">${x}</span>`).join(' ');
+  cam('sh3',t,[4.5,6.0],1.0,1.07);
 }
-function S3(t){
-  const el=$('s3'); el.style.opacity=sceneAlpha(t,T.s3,.3,.3);
-  const n=Math.round(eo(r(t,12.75,14.0))*670); $('s3num').textContent=n;
-  reveal($('s3cap'),t,13.2,.025,.4);
-  const d=eo(r(t,14.2,14.7)); $('s3def').style.opacity=d; $('s3def').style.transform=`translateX(${(1-d)*-60}px)`;
-  $('s3src').style.opacity=r(t,13.0,13.5);
+function sh4(t){
+  const v=Math.round(eo(r(t,6.05,6.9))*57); $('n4').textContent=v;
+  $('n4').style.filter=`blur(${(1-r(t,6.05,6.9))*6}px)`;
+  slide($('red4'),t,6.9,.25,0,50);
+  $('bar4').style.width=(eio(r(t,7.4,7.85))*760)+'px';
+  pop($('stamp4'),t,8.0,.2,1.8); $('stamp4').style.transform+=' rotate(-4deg)';
+  $('src4').style.opacity=r(t,6.4,6.8);
+  cam('sh4',t,[6,9],1.0,1.05, shake(t,8.0,16,.3));
 }
-function S4(t){
-  const el=$('s4'); el.style.opacity=sceneAlpha(t,T.s4,.3,.3);
-  reveal($('s4head'),t,16.55,.06,.4);
-  const steps=[...document.querySelectorAll('#flow .step')];
-  const starts=[17.2,17.95,18.7,19.45];
-  steps.forEach((s,i)=>{ const a=eo(r(t,starts[i]-.35,starts[i])); s.style.opacity=a; s.style.transform=`translateX(${(1-a)*40}px)`;
-    const done = t>=starts[i]+.55 && i<3; s.classList.toggle('done',done);
-    s.querySelector('.st').textContent = done?'✓ TAMAM': (t>=starts[i]?'ÇALIŞIYOR…':'BEKLİYOR');
-    s.querySelector('.node').textContent = done?'✓':String(i+1).padStart(2,'0'); });
-  // 4. adım bekliyor → kapı
-  const s4done = t>=20.0; steps[3].querySelector('.st').textContent = s4done? 'DURDU':steps[3].querySelector('.st').textContent;
-  if(s4done){ steps[3].querySelector('.st').style.color='#E9A23B'; steps[3].querySelector('.node').style.borderColor='#E9A23B'; steps[3].querySelector('.node').style.color='#E9A23B'; }
-  else { steps[3].querySelector('.st').style.color=''; steps[3].querySelector('.node').style.borderColor=''; steps[3].querySelector('.node').style.color=''; }
-  const line=$('line'); line.style.height='450px'; line.style.opacity=r(t,16.9,17.2); $('linefill').style.height = (eio(r(t,17.2,20.0))*450)+'px';
-  const g=$('gate'); const ga=eo(r(t,20.0,20.4)); g.style.opacity=ga; g.style.transform=`scale(${.96+.04*ga})`;
-  const pulse = t>20.4? .5+.5*Math.sin((t-20.4)*7):0; g.style.boxShadow=`0 0 ${30*pulse}px rgba(233,162,59,${.55*pulse})`;
-  reveal($('s4q'),t,21.0,.08,.45);
+function sh5(t){
+  const v=Math.round(eo(r(t,9.05,9.8))*47); $('n5').textContent=v;
+  const f=Math.round(eo(r(t,9.05,9.9))*47);
+  dots5.forEach((d,i)=>{d.style.background=i<f?'#162C5E':'rgba(22,44,94,.15)'; d.style.transform=`scale(${eo(r(t,9.0+i*.004,9.2+i*.004))})`;});
+  pop($('cap5'),t,10.3,.22,1.5);
+  cam('sh5',t,[9,11.5],1.0,1.05, shake(t,10.3,12,.25));
 }
-function S5(t){
-  const el=$('s5'); el.style.opacity=sceneAlpha(t,T.s5,.35,.01);
-  reveal($('s5q'),t,23.2,.07,.45);
-  [...document.querySelectorAll('.role')].forEach((ro,i)=>{ const a=eo(r(t,24.5+i*.35,24.95+i*.35)); ro.style.opacity=a; ro.style.transform=`translateY(${(1-a)*30}px)`; });
-  const c=eo(r(t,26.4,27.0)); $('card').style.opacity=c; $('card').style.transform=`translateY(${(1-c)*60}px)`;
-  $('logo').style.opacity=eo(r(t,27.2,27.7)); $('url').style.opacity=eo(r(t,27.4,27.9));
+function sh6(t){
+  const v=Math.round(eo(r(t,11.55,12.6))*670000); $('n6').textContent='+'+v.toLocaleString('tr-TR');
+  slide($('cap6'),t,12.7,.35,0,60);
+  cam('sh6',t,[11.5,14.5],1.0,1.05, shake(t,12.6,20,.3));
 }
+function sh7(t){
+  slide($('h7'),t,14.55,.3,0,60);
+  const sts=[...document.querySelectorAll('#sh7 .st')]; const at=[15.5,16.0,16.5];
+  sts.forEach((s,i)=>{slide(s,t,at[i],.2,60,0); s.classList.toggle('ok',t>=at[i]+.3); s.querySelector('.nd').textContent=t>=at[i]+.3?'✓':i+1;});
+  const g=$('gate'); pop(g,t,17.0,.25,1.15);
+  const pl=t>17.3?.5+.5*Math.sin((t-17.3)*9):0; g.style.boxShadow=`0 0 ${50*pl}px rgba(233,162,59,${.6*pl})`;
+  slide($('ask7'),t,18.3,.35,0,60);
+  const z = t<18.3? lerp(1.0,1.04,r(t,14.5,18.3)) : lerp(1.04,1.12,eio(r(t,18.3,20.4)));
+  document.querySelector('#sh7 .cam').style.transform=`scale(${z}) ${shake(t,17.0,14,.3)}`;
+}
+function sh8(t){
+  slide($('a1'),t,20.55,.2,0,30); slide($('a2'),t,20.7,.35,0,60);
+  pop($('w1'),t,22.0,.2,1.5); pop($('w2'),t,22.5,.2,1.5); pop($('w3'),t,23.0,.2,1.5);
+  cam('sh8',t,[20.5,23.5],1.0,1.05);
+}
+function sh9(t){
+  slide($('card9'),t,23.55,.35,0,120);
+  [...document.querySelectorAll('#sh9 .pg')].forEach((p,i)=>slide(p,t,24.1+i*.2,.25,-60,0));
+  pop($('btn9'),t,25.2,.25,1.3); slide($('logo9'),t,25.5,.3,0,30);
+  cam('sh9',t,[23.5,27],1.0,1.03);
+}
+const FN={sh1,sh2,sh3,sh4,sh5,sh6,sh7,sh8,sh9};
 function seek(t){
-  $('prog').style.width = (t/T.total*100)+'%';
-  S1(t); S2(t); S3(t); S4(t); S5(t);
+  for(const [id,[a,b]] of Object.entries(SHOTS)){ const on=t>=a&&t<b || (id==='sh9'&&t>=b); $(id).style.display=on?'block':'none'; if(on) FN[id](t); }
+  // kesmelerde kısa beyaz flaş
+  let fl=0; for(const [a] of Object.values(SHOTS)) if(a>0){ const d=t-a; if(d>=0&&d<.12) fl=Math.max(fl,(1-d/.12)*.55); }
+  $('flash').style.opacity=fl;
+  $('grain').style.transform=`translate(${(Math.floor(t*24)*37)%60-30}px,${(Math.floor(t*24)*53)%60-30}px)`;
+  $('prog').style.width=(t/DURATION*100)+'%';
 }
-window.seek=seek; window.DURATION=T.total;
+window.seek=seek; window.DURATION=DURATION;
 
-/* ---------------- önizleme oynatıcısı ---------------- */
-const scrub=$('scrub'), tc=$('tc'); let playing=false, t0=0, base=0;
-function fit(){ if(window.__render) return; const s=Math.min((innerWidth-32)/1080,(innerHeight-90)/1920);
-  $('stage').style.transform=`scale(${s})`; $('wrap').style.width=1080*s+'px'; $('wrap').style.height=1920*s+'px'; $('ui').style.width=Math.max(320,1080*s)+'px'; }
-addEventListener('resize',fit); fit();
-function loop(now){ if(!playing) return; let t=base+(now-t0)/1000; if(t>T.total){t=0;base=0;t0=now;}
-  seek(t); scrub.value=t; tc.textContent=t.toFixed(2); requestAnimationFrame(loop); }
-$('play').onclick=()=>{ playing=!playing; $('play').textContent=playing?'❚❚ Durdur':'▶︎ Oynat';
-  if(playing){ base=+scrub.value; t0=performance.now(); requestAnimationFrame(loop);} };
-scrub.oninput=()=>{ playing=false; $('play').textContent='▶︎ Oynat'; seek(+scrub.value); tc.textContent=(+scrub.value).toFixed(2); };
-$('safebtn').onclick=()=>{ const s=$('safe'); s.style.display=s.style.display==='block'?'none':'block'; };
-document.fonts.ready.then(()=>seek(+scrub.value));
-seek(0);
+const scrub=$('scrub'),tc=$('tc');let playing=false,t0=0,base=0;
+function fit(){ if(window.__render) return; const s=Math.min((innerWidth-28)/1080,(innerHeight-80)/1920);
+  $('stage').style.transform=`scale(${s})`;$('wrap').style.width=1080*s+'px';$('wrap').style.height=1920*s+'px';$('ui').style.width=Math.max(320,1080*s)+'px';}
+addEventListener('resize',fit);fit();
+function loop(now){if(!playing)return;let t=base+(now-t0)/1000;if(t>DURATION){t=0;base=0;t0=now;}seek(t);scrub.value=t;tc.textContent=t.toFixed(2);requestAnimationFrame(loop);}
+$('play').onclick=()=>{playing=!playing;$('play').textContent=playing?'❚❚ Durdur':'▶︎ Oynat';if(playing){base=+scrub.value;t0=performance.now();requestAnimationFrame(loop);}};
+scrub.oninput=()=>{playing=false;$('play').textContent='▶︎ Oynat';seek(+scrub.value);tc.textContent=(+scrub.value).toFixed(2);};
+$('safebtn').onclick=()=>{const s=$('safe');s.style.display=s.style.display==='block'?'none':'block';};
+document.fonts.ready.then(()=>seek(+scrub.value)); seek(0);
 </script>
 </body>
 </html>
